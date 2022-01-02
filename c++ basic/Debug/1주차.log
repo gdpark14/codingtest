@@ -1,0 +1,4 @@
+﻿  1주차.cpp
+c:\users\user\desktop\개인공부\올마이트\1주차\1주차.cpp(15): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\개인공부\올마이트\1주차\1주차.cpp(21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  1주차.vcxproj -> C:\Users\USER\Desktop\개인공부\올마이트\1주차\Debug\1주차.exe
