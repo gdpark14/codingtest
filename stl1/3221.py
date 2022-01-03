@@ -3,40 +3,46 @@ import collections
 
 
 
-line,time=map(int,sys.stdin.readline().split())
-num_ant=int(sys.stdin.readline())
+L,T=map(int,sys.stdin.readline().split())
+N=int(input())
+ants=[]
+for i in range(N):
+    temp=sys.stdin.readline().split()
+    temp[0]=int(temp[0])
+    ants.append(temp)
 
 
-state=collections.defaultdict(list)
-
-for i in range(num_ant):
-    index,dirc=map(str,sys.stdin.readline().split())
-    state[int(index)]=[dirc]
-
-for i in range(time):
-    new_state=collections.defaultdict(list)
-
-    for index,dirc in state.items():
-        if dirc==['L','D'] or dirc==['D','L']:
-            new_state[index-1].append("L")
-            new_state[index+1].append("D")
-
-        elif dirc==['L']:
-            if index==0:
-                new_state[1].append("D")
+for ant in ants:
+    if ant[1]=="D":
+        one_step=L-ant[0]
+        if one_step>=T:
+            ant[0]+=T
+        else:
+            way_to_go=T-one_step
+            #가장 오른쪽
+            if (way_to_go//L)%2==0:
+                move=way_to_go%L
+                ant[0]=L-move
+            #가장 왼쪽
             else:
-                new_state[index-1].append("L")
-        elif dirc==['D']:
-            if index==line:
-                new_state[line-1].append("L")
+                move=way_to_go%L
+                ant[0]=move
+    else:
+        one_step=ant[0]
+        if one_step>=T:
+            ant[0]-=T
+        else:
+            way_to_go=T-one_step
+            if (way_to_go//L)%2==0:
+                move=way_to_go%L
+                ant[0]=move
             else:
-                new_state[index+1].append("D")
-    state=new_state
+                move=way_to_go%L
+                ant[0]=L-move
 
+
+ants.sort(key=lambda x:[x[0]])
 ans=[]
-for keys,values in state.items():
-    if len(values)>1:
-        ans.append(keys)
-    ans.append(keys)
-print(sorted(ans))
-
+for i in ants:
+    ans.append(i[0])
+print(*ans)
