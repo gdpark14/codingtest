@@ -1,26 +1,21 @@
 import sys
 
 num=int(sys.stdin.readline())
+global count
 count=0
-
-def move(from_,to,nums):
-    global count
-
-    if nums==0:
+ans=[]
+def move(from_,to,num):
+    if num==0:
         return
-    move(from_,6-(from_+to),nums-1)
-    count+=1
-    move(6-(from_+to),to,nums-1)
-
-def move_count(from_,to,nums):
-    global count
-
-    if nums==0:
-        return
-    move_count(from_,6-(from_+to),nums-1)
-    print(from_,to)
-    move_count(6-(from_+to),to,nums-1)
+    else:
+        global count
+        count+=1
+    stopby=6-(from_+to)
+    move(from_,stopby,num-1)
+    ans.append([from_,to])
+    move(stopby,to,num-1)
 
 move(1,3,num)
 print(count)
-move_count(1,3,num)
+for i in ans:
+    print(*i)
