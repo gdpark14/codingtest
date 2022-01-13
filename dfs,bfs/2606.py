@@ -1,23 +1,27 @@
 import sys
 import collections
 
-num=int(sys.stdin.readline())
-num_pair=int(sys.stdin.readline())
-ans=[1]
-network=collections.defaultdict(list)
-
-for i in range(num_pair):
+com_num=int(input())
+pair_num=int(input())
+computers=collections.defaultdict(list)
+for _  in range(pair_num):
     start,end=map(int,sys.stdin.readline().split())
-    network[start].append(end)
-    network[end].append(start)
+    computers[start].append(end)
+    computers[end].append(start)
 
-def dfs(start,dictionary):
-    if start not in dictionary.keys():
-        return
-    for i in dictionary[start]:
-        if i not in ans:
-            ans.append(i)
-            dfs(i,dictionary)
+check=[False]*(com_num+1)
+count=0
 
-dfs(1,network)
-print(len(ans)-1)
+def dfs(index):
+    global check
+    check[index]=True
+
+    global count
+    if index!=1:
+        count+=1
+
+    for next_index in computers[index]:
+        if check[next_index]==False:
+            dfs(next_index)
+dfs(1)
+print(count)
