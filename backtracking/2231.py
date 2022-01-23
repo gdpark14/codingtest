@@ -13,5 +13,3 @@ for i in range(1,N+1):
 
 print(ans)
 x=map(int,'12345')
-for i in range(len(x)):
-    print(x[i])
